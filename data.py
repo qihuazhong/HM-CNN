@@ -1,5 +1,5 @@
 import pandas as pd
-
+from numpy import array
 n_features = 5
 n_windows = 100
 bin_size = 100
@@ -22,15 +22,18 @@ def read_toy_data(path="data/toy/train.csv"):
     y = []
     for i in range(0, len(raw_labels), n_windows):
         y.append(raw_labels[i])
+    y = array(y)
 
     # parse features to input
     values = df.values
     input_values = values[:, 2:7]
 
-    # shape : [#sample, #window, #feature]
+    # shape : [#sample, #window, #features]
     x = input_values.reshape(len(y), n_windows, n_features)
 
     return x, y
 
 
-print(read_toy_data())
+# features, labels = read_toy_data()
+# print(features[0])
+# print(features.shape)
