@@ -1,3 +1,5 @@
+### Raw alignments files
+
 To download the data files from roadmap epigenomics project
 
 ~~~Shell
@@ -8,5 +10,14 @@ In case connection is interrupted during downloading, run the command a second t
  
 ~~~Shell
 wget -ci URLs.txt
+~~~
+
+
+### Expression data
+~~~R
+library("AnnotationHub")
+ahub <- AnnotationHub()
+
+expr <- ahub[[""AH49019""]]
 ~~~
 
