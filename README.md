@@ -4,7 +4,7 @@ Deep-learning for predicting gene expression from histone modifications
 Original repo: https://github.com/QData/DeepChrome
 
 
-Deep-learning for predicting gene expression from histone modifications http://deepchrome.org
+
 ## Model Summary
 <pre>
 _________________________________________________________________
