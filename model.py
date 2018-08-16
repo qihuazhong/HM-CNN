@@ -1,8 +1,7 @@
-from data import *
-from keras import losses
-from keras.models import Model, Sequential
+
+from keras.models import Sequential
 from keras.layers import Dense, Conv1D, MaxPooling1D, Dropout, Flatten
-from sklearn.utils import shuffle
+
 
 import tensorflow as tf
 from sklearn.metrics import roc_auc_score
