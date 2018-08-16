@@ -14,7 +14,12 @@ wget -ci URLs.txt
 
 
 ### Expression data
+
+The expression is fetched by using the AnnotationHub package in R
 ~~~R
+source("https://bioconductor.org/biocLite.R")
+biocLite("AnnotationHub")
+
 library("AnnotationHub")
 ahub <- AnnotationHub()
 
