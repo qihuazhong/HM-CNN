@@ -1,7 +1,15 @@
-from data import read_toy_data
+from data import *
 from keras import losses
 from keras.models import Model, Sequential
 from keras.layers import Dense, Conv1D, MaxPooling1D, Dropout, Flatten
+from sklearn.utils import shuffle
+
+import tensorflow as tf
+from sklearn.metrics import roc_auc_score
+
+
+def auc_roc(y_true, y_pred):
+    return tf.py_func(roc_auc_score, (y_true, y_pred), tf.double)
 
 
 # Design Network
@@ -18,14 +26,16 @@ def build_model(n_filters=50, kernel_size=10, pool_size=5):
     model.add(Dense(625, activation='relu', name='Dense1'))
     model.add(Dense(125, activation='relu', name='Dense2'))
     model.add(Dense(1, activation='sigmoid', name='Dense3'))
-    model.compile(loss='binary_crossentropy', optimizer='adam')
+    model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy', auc_roc])
 
     return model
 
 
-def train(model, x_train, y_train, x_valid, y_valid, epochs):
+def train(model, x_train, y_train, batch_size, epochs):
     # fit network
-    history = model.fit(x_train, y_train, epochs=epochs,
-                        validation_data=(x_valid, y_valid))
+    history = model.fit(x_train, y_train, epochs=epochs, batch_size=batch_size,
+                        validation_split=0.5, shuffle=True)
 
-    model.save('my_model.h5')
+    #     model.save('my_model.h5')
+
+    return history
